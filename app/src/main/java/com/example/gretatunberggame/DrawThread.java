@@ -9,8 +9,10 @@ import android.view.SurfaceHolder;
 
 public class DrawThread extends Thread {
     private SurfaceHolder surfaceHolder;
-    private Sprite[] sprites;
+    private Sprite sprite;//текущий спрайт
+    private Sprite[] sprites;// набор спрайтов
     private volatile boolean running = true;//флаг для остановки потока
+    private boolean change = true;
     private Paint bkgr = new Paint();{
         bkgr.setColor(Color.WHITE);
     }
@@ -32,8 +34,13 @@ public class DrawThread extends Thread {
         while (running) {
             Canvas canvas = surfaceHolder.lockCanvas();
             if (canvas != null) {
+                if (change){
+                    sprite = sprites[(int)(Math.random()*sprites.length)];
+                }
                 try {
                     canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), bkgr);
+
+
                     sprite.draw(canvas);
                     sprite.moveDown(1, canvas);
                 } finally {
