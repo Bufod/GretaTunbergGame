@@ -60,7 +60,7 @@ public class DrawView extends SurfaceView
                 break;
             case MotionEvent.ACTION_UP:
                 if (touch){
-                    drawThread.passCoordinates(prevX,prevY,getX(),getY());
+                    drawThread.passCoordinates(prevX,prevY,event.getX(),event.getY());
                     prevY = null;
                     prevX = null;
                 }
@@ -68,6 +68,6 @@ public class DrawView extends SurfaceView
                 break;
         }
 
-        return super.onTouchEvent(event);
+        return true;
     }
 }
