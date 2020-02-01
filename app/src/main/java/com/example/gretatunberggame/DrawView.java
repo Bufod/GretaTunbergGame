@@ -1,7 +1,9 @@
 package com.example.gretatunberggame;
 
+import android.app.Notification;
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -42,5 +44,30 @@ public class DrawView extends SurfaceView
                 //
             }
         }
+    }
+
+    Float prevX, prevY;
+    boolean touch = false;
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                prevX = event.getX();
+                prevY = event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                touch = true;
+                break;
+            case MotionEvent.ACTION_UP:
+                if (touch){
+                    drawThread.passCoordinates(prevX,prevY,getX(),getY());
+                    prevY = null;
+                    prevX = null;
+                }
+                touch = false;
+                break;
+        }
+
+        return super.onTouchEvent(event);
     }
 }

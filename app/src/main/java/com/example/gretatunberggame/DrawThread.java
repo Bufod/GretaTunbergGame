@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.view.SurfaceHolder;
 
 public class DrawThread extends Thread {
@@ -31,6 +32,16 @@ public class DrawThread extends Thread {
 
     private void setStartCoordinate(Sprite sprite, int canvasWidth){
         sprite.setX((float)(Math.random()*canvasWidth));
+    }
+
+    public void passCoordinates(float x0, float y0,
+                                float x1, float y1){
+        if (sprite != null){
+            if (sprite.isIntersect(
+                    new Rect((int) x0,(int) y0, (int) x1, (int) y1))) {
+                change = true;
+            }
+        }
     }
 
     @Override

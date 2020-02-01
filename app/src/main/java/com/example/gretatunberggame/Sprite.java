@@ -11,6 +11,7 @@ public class Sprite {
     private int height, width;
     private Bitmap bmp;
     private Paint paint = new Paint();
+    private Rect rect;
 
     public Sprite(Bitmap bmp) {
         this.bmp = bmp;
@@ -39,10 +40,15 @@ public class Sprite {
     }
 
     public void draw(Canvas canvas){
-        Rect rect = new Rect();
+        rect = new Rect();
         rect.set((int) x,(int) y, (int)(x + 100), (int)(y + 100));
         canvas.drawBitmap(bmp, null, rect, paint);
     }
 
-    public boolean isIntersect(Rect rect)
+    public boolean isIntersect(Rect otherRect){
+        if (rect != null){
+            return rect.intersect(otherRect);
+        }
+        return false;
+    }
 }
