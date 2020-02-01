@@ -29,6 +29,10 @@ public class DrawThread extends Thread {
         running = false;
     }
 
+    private void setStartCoordinate(Sprite sprite, int canvasWidth){
+        sprite.setX((float)(Math.random()*canvasWidth));
+    }
+
     @Override
     public void run() {
         while (running) {
@@ -36,13 +40,16 @@ public class DrawThread extends Thread {
             if (canvas != null) {
                 if (change){
                     sprite = sprites[(int)(Math.random()*sprites.length)];
+                    setStartCoordinate(sprite, canvas.getWidth());
+                    change = false;
                 }
                 try {
                     canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), bkgr);
 
-
-                    sprite.draw(canvas);
-                    sprite.moveDown(1, canvas);
+                    if (sprite != null) {
+                        sprite.draw(canvas);
+                        sprite.moveDown(1, canvas);
+                    }
                 } finally {
                     surfaceHolder.unlockCanvasAndPost(canvas);
                 }

@@ -43,4 +43,6 @@ public class Sprite {
         rect.set((int) x,(int) y, (int)(x + 100), (int)(y + 100));
         canvas.drawBitmap(bmp, null, rect, paint);
     }
+
+    public boolean isIntersect(Rect rect)
 }
