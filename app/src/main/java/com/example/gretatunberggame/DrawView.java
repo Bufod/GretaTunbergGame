@@ -16,8 +16,12 @@ public class DrawView extends SurfaceView
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         drawThread = new DrawThread(getContext(),getHolder());
-        drawThread.setSprite(new Sprite(BitmapFactory
-                .decodeResource(this.getResources(), R.drawable.trash)));
+        drawThread.setSprite(new Sprite[]{
+                new Sprite(BitmapFactory
+                        .decodeResource(this.getResources(), R.drawable.trash)),
+                new Sprite(BitmapFactory
+                        .decodeResource(this.getResources(), R.drawable.trash2))
+        });
         drawThread.start();
     }
 

@@ -1,6 +1,7 @@
 package com.example.gretatunberggame;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -8,7 +9,7 @@ import android.view.SurfaceHolder;
 
 public class DrawThread extends Thread {
     private SurfaceHolder surfaceHolder;
-    private Sprite sprite;
+    private Sprite[] sprites;
     private volatile boolean running = true;//флаг для остановки потока
     private Paint bkgr = new Paint();{
         bkgr.setColor(Color.WHITE);
@@ -18,8 +19,8 @@ public class DrawThread extends Thread {
         this.surfaceHolder = surfaceHolder;
     }
 
-    public void setSprite(Sprite sprite) {
-        this.sprite = sprite;
+    public void setSprite(Sprite[] sprites) {
+        this.sprites = sprites;
     }
 
     public void requestStop() {
